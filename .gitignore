@@ -1,0 +1,15 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.mcp.json
+.claude/
+
+# Private prospect and outreach data
+*.csv
+contactcleaining
+
+# Local tooling output
+.vercel/
+.DS_Store
+__pycache__/
