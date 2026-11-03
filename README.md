@@ -1,6 +1,6 @@
 # Savvy Producer website
 
-Static landing page for Savvy Producer. The homepage is `index.html` and its rocket visual is `hero-rocket.png`.
+Static website for Savvy Producer. The homepage is `index.html`. The previous homepage is preserved at `resources.html`.
 
 ## Preview locally
 
