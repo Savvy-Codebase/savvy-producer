@@ -13,3 +13,6 @@ contactcleaining
 .vercel/
 .DS_Store
 __pycache__/
+
+# Technical/source materials kept local for reference
+.local-reference/

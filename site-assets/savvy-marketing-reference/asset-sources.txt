@@ -1,0 +1,20 @@
+Source: https://savvy-marketing.io/
+Collected: 2026-10-29
+
+sm-horizontal-on-dark.png
+https://savvy-marketing.io/__l5e/assets-v1/6a5164fa-76f3-402b-b674-922bb41aa887/sm-horizontal-on-dark.png
+
+sm-horizontal-navy.png
+https://savvy-marketing.io/__l5e/assets-v1/7f7e2b02-d590-46ff-9e7f-b79880785623/sm-horizontal-navy.png
+
+sm-monogram-mint.png
+https://savvy-marketing.io/__l5e/assets-v1/a221111f-d58c-45cc-8b42-03b3aae26888/sm-monogram-mint.png
+
+lead-card-pile.png
+https://savvy-marketing.io/assets/lead-card-pile-v4-CmYKoCyD.jpg
+
+open-graph-preview.png
+https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/lovp_4nr3v5tj4180masjbx132grd3h/32330c4fab411734759b66262c49837a_1792988673264.png
+
+favicon.svg
+https://savvy-marketing.io/favicon.svg

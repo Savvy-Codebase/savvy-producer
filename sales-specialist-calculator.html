@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2B Lead Generation Sales Specialist</title>
+<meta name="description" content="Now hiring: B2B Lead Generation Sales Specialist. Earn $0.10 per lead on first orders and $0.075 per lead on every reorder. Run the numbers with the commission calculator.">
+<style>
+  :root {
+    --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --navy:#0b1f3a;
+    --teal:#14b8a6; --teal-d:#0f766e; --gold:#f59e0b; --soft:#f1f5f9; --bad:#b91c1c; --bg:#f8fafc;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.55; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 20px; }
+
+  .hero { background:linear-gradient(135deg,#0b1f3a 0%,#0f766e 100%); color:#fff; padding:64px 0 96px; position:relative; overflow:hidden; }
+  .hero::after { content:""; position:absolute; right:-120px; top:-120px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,rgba(20,184,166,.4),transparent 70%); }
+  .eyebrow { text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:700; color:var(--teal); }
+  h1 { font-size:clamp(2rem,6vw,3.2rem); line-height:1.08; margin:12px 0; letter-spacing:-.015em; }
+  .tag { font-size:1.2rem; color:#cbd5e1; max-width:34rem; }
+  .tag b { color:#fff; }
+  .badge { display:inline-block; margin-top:20px; background:var(--gold); color:#1c1917; font-weight:800; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; padding:8px 18px; border-radius:99px; }
+  .cta { display:inline-block; margin:20px 0 0 10px; color:#fff; font-weight:700; text-decoration:none; border-bottom:2px solid var(--teal); padding-bottom:2px; }
+
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:-48px; position:relative; z-index:2; }
+  .stat { background:#fff; border-radius:14px; padding:18px; box-shadow:0 10px 30px rgba(15,23,42,.12); border-top:4px solid var(--teal); }
+  .stat .n { font-size:1.9rem; font-weight:800; color:var(--navy); line-height:1.05; }
+  .stat .l { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
+
+  section { padding:48px 0 0; }
+  h2 { font-size:1.6rem; color:var(--navy); margin-bottom:6px; letter-spacing:-.01em; }
+  h2 span { color:var(--teal-d); }
+  .lead { color:var(--muted); margin-bottom:18px; max-width:46rem; }
+
+  .tablewrap { overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:#fff; }
+  table { width:100%; border-collapse:collapse; min-width:560px; font-size:.95rem; }
+  th { background:var(--navy); color:#fff; text-align:left; padding:12px 14px; font-size:.75rem; text-transform:uppercase; letter-spacing:.07em; }
+  th.us { background:var(--teal-d); }
+  td { padding:12px 14px; border-top:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:700; color:var(--navy); }
+  td.them { color:var(--bad); }
+  td.us { background:#f0fdfa; color:var(--teal-d); font-weight:700; }
+  .callout { margin-top:14px; background:#fff; border:1px solid var(--line); border-left:5px solid var(--gold); border-radius:10px; padding:14px 18px; }
+
+  .earn { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .card { border:1px solid var(--line); border-radius:14px; padding:22px; background:#fff; }
+  .card.dark { background:linear-gradient(135deg,#0b1f3a,#0f766e); color:#fff; border:none; }
+  .card .k { text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:700; color:var(--teal-d); }
+  .card.dark .k { color:var(--teal); }
+  .card .v { font-size:2.6rem; font-weight:800; line-height:1.1; margin:6px 0 4px; }
+  .card .v small { font-size:1rem; font-weight:600; opacity:.7; }
+  .card .d { color:var(--muted); font-size:.92rem; }
+  .card.dark .d { color:#cbd5e1; }
+
+  /* calculator */
+  .calc { background:#fff; border:1px solid #99f6e4; border-radius:18px; box-shadow:0 14px 40px rgba(15,118,110,.12); overflow:hidden; }
+  .calc-grid { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); }
+  .inputs { padding:26px; background:linear-gradient(180deg,#f0fdfa,#fff); border-right:1px solid var(--line); }
+  .field { margin-bottom:22px; }
+  .field label { display:flex; justify-content:space-between; align-items:baseline; font-weight:700; color:var(--navy); font-size:.92rem; margin-bottom:6px; }
+  .field output { color:var(--teal-d); font-size:1.15rem; font-weight:800; }
+  .field .hint { font-size:.8rem; color:var(--muted); margin-top:4px; }
+  input[type=range] { width:100%; accent-color:var(--teal-d); }
+  .numrow { display:flex; gap:10px; align-items:center; }
+  input[type=number] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:1rem; font-weight:700; color:var(--navy); }
+  input:focus-visible { outline:3px solid var(--teal); outline-offset:2px; }
+  .results { padding:26px; }
+  .res-title { font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; font-weight:800; color:var(--teal-d); margin-bottom:10px; }
+  .res-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:22px; }
+  .res { border:1px solid var(--line); border-radius:12px; padding:14px; background:#fff; }
+  .res .n { font-size:1.45rem; font-weight:800; color:var(--teal-d); line-height:1.1; overflow-wrap:anywhere; }
+  .res .l { font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-top:4px; }
+  .res.big { background:var(--navy); border-color:var(--navy); }
+  .res.big .n { color:#fff; font-size:1.7rem; }
+  .res.big .l { color:#cbd5e1; }
+  .res.gold { border-top:4px solid var(--gold); }
+  .proj { width:100%; border-collapse:collapse; min-width:0; font-size:.88rem; }
+  .proj th { background:var(--soft); color:var(--navy); padding:8px 10px; text-align:right; }
+  .proj th:first-child, .proj td:first-child { text-align:left; }
+  .proj td { padding:8px 10px; text-align:right; font-variant-numeric:tabular-nums; }
+  .proj tr.total td { font-weight:800; background:#f0fdfa; color:var(--teal-d); }
+  .proj-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:10px; }
+  .note { font-size:.8rem; color:var(--muted); margin-top:12px; }
+
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .step .c { width:34px; height:34px; border-radius:50%; background:var(--teal); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
+  .step b { color:var(--navy); display:block; }
+  .step span { color:var(--muted); font-size:.93rem; }
+  .final { margin-top:34px; text-align:center; background:linear-gradient(135deg,#0b1f3a,#0f766e); color:#fff; border-radius:16px; padding:28px 20px; font-size:1.25rem; font-weight:700; }
+
+
+  /* apply form */
+  .apply { background:#fff; border:1px solid var(--line); border-radius:18px; padding:28px; box-shadow:0 10px 30px rgba(15,23,42,.08); }
+  .apply form { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .apply .full { grid-column:1 / -1; }
+  .apply label { display:block; font-weight:700; color:var(--navy); font-size:.9rem; margin-bottom:6px; }
+  .apply label em { color:var(--bad); font-style:normal; }
+  .apply input[type=text], .apply input[type=email], .apply input[type=tel], .apply textarea { width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:8px; font:inherit; color:var(--ink); background:#fff; }
+  .apply textarea { min-height:90px; resize:vertical; }
+  .apply input[type=file] { width:100%; padding:14px; border:2px dashed #99f6e4; border-radius:10px; background:#f0fdfa; font:inherit; }
+  .apply input[type=file]::file-selector-button { background:var(--teal-d); color:#fff; border:0; padding:8px 14px; border-radius:8px; font-weight:700; margin-right:12px; cursor:pointer; }
+  .apply .hint { font-size:.8rem; color:var(--muted); margin-top:4px; }
+  .btn { background:linear-gradient(135deg,#0f766e,#14b8a6); color:#fff; border:0; border-radius:10px; padding:14px 28px; font-size:1rem; font-weight:800; cursor:pointer; }
+  .btn:disabled { opacity:.6; cursor:wait; }
+  .btn:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+  .hp { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  #formMsg { font-weight:700; padding:12px 14px; border-radius:8px; display:none; }
+  #formMsg.ok { display:block; background:#ecfdf5; color:#065f46; }
+  #formMsg.err { display:block; background:#fef2f2; color:var(--bad); }
+  @media (max-width:820px) { .apply form { grid-template-columns:1fr; } }
+
+  footer { padding:36px 0 56px; color:var(--muted); font-size:.82rem; }
+  footer b { color:var(--navy); }
+
+  @media (max-width:820px) {
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .earn, .steps { grid-template-columns:1fr; }
+    .calc-grid { grid-template-columns:1fr; }
+    .inputs { border-right:none; border-bottom:1px solid var(--line); }
+    .res-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:480px) { .res-grid { grid-template-columns:1fr; } .cta { margin-left:0; display:block; width:max-content; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Now hiring &middot; Recurring commission</div>
+    <h1>B2B Lead Generation<br>Sales Specialist</h1>
+    <p class="tag"><b>Build a portfolio. Earn on every reorder.</b></p>
+    <span class="badge">Open role &middot; B2B sales</span>
+    <a class="cta" href="#calculator">Run your numbers &darr;</a><a class="cta" href="#apply">Apply now &darr;</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stats" aria-label="Key numbers">
+    <div class="stat"><div class="n">$0.60</div><div class="l">Price per lead</div></div>
+    <div class="stat"><div class="n">2,100</div><div class="l">Lead weekly minimum</div></div>
+    <div class="stat"><div class="n">7 days</div><div class="l">Paced delivery</div></div>
+    <div class="stat"><div class="n">88&ndash;98%</div><div class="l">Lower than comparison range</div></div>
+  </div>
+
+  <section>
+    <h2>A clear value story <span>for agency owners</span></h2>
+    <p class="lead">Insurance agencies often pay $5&ndash;$25 per lead for shared prospects and compete to contact them first. Our real-time insurance leads are priced at $0.60 each, with orders delivered at a steady pace over seven days.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cost factor</th><th>Traditional shared leads</th><th class="us">Our model</th></tr></thead>
+        <tbody>
+          <tr><td>Price per lead</td><td class="them">$5.00&ndash;$25.00</td><td class="us">$0.60</td></tr>
+          <tr><td>Competition</td><td>Often shared among multiple agents</td><td class="us">Real-time leads with paced delivery</td></tr>
+          <tr><td>Weekly volume</td><td>Varies by budget and source</td><td class="us">2,100-lead minimum</td></tr>
+          <tr><td>Delivery</td><td>May arrive in a concentrated batch</td><td class="us">Spread across seven days</td></tr>
+          <tr><td>Weekly cost at 2,100 leads</td><td class="them">$10,500&ndash;$52,500</td><td class="us">$1,260</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>The headline:</b> at these stated prices, our leads cost approximately <b>88%&ndash;98% less</b> than the comparison range. Actual savings depend on the lead source, quality, and purchasing terms.</div>
+  </section>
+
+  <section>
+    <h2>The <span>role</span></h2>
+    <p class="lead">Help agencies lower their lead costs while building a client portfolio that can generate recurring commission. Your work is to win agency accounts and help them establish a consistent weekly order. As your client portfolio grows, repeat orders can add a meaningful recurring income stream.</p>
+    <div class="earn">
+      <div class="card">
+        <div class="k">First order</div>
+        <div class="v" style="color:var(--navy)">$0.10 <small>per lead</small></div>
+        <div class="d">Paid on the first order from each account you win.</div>
+      </div>
+      <div class="card dark">
+        <div class="k">Repeat &amp; recurring orders</div>
+        <div class="v">$0.075 <small>per lead</small></div>
+        <div class="d">On each order, for the life of the account.*</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator">
+    <h2>Commission <span>calculator</span></h2>
+    <p class="lead">Every account orders at least the 2,100-lead weekly minimum. Set how many accounts you win and see new business income and residual income.</p>
+
+    <div class="calc">
+      <div class="calc-grid">
+        <form class="inputs" onsubmit="return false" aria-label="Calculator inputs">
+          <div class="field">
+            <label for="accts">Active accounts <output id="acctsOut">20</output></label>
+            <input type="range" id="accts" min="1" max="100" value="20">
+            <div class="hint">Accounts reordering weekly. Drives the portfolio snapshot.</div>
+          </div>
+          <div class="field">
+            <label for="leads">Leads per weekly order <output id="leadsOut">2,100</output></label>
+            <div class="numrow"><input type="number" id="leads" min="2100" step="100" value="2100"></div>
+            <div class="hint">Minimum 2,100. Lower values are raised to 2,100.</div>
+          </div>
+          <div class="field">
+            <label for="newm">New accounts won per month <output id="newmOut">4</output></label>
+            <input type="range" id="newm" min="0" max="20" value="4">
+            <div class="hint">Drives new business income and the 12-month projection.</div>
+          </div>
+          <div class="field">
+            <label for="churn">Monthly account churn <output id="churnOut">0%</output></label>
+            <input type="range" id="churn" min="0" max="20" value="0">
+            <div class="hint">Share of accounts lost each month in the projection.</div>
+          </div>
+        </form>
+
+        <div class="results" aria-live="polite">
+          <div class="res-title">Portfolio snapshot (residual)</div>
+          <div class="res-grid">
+            <div class="res"><div class="n" id="rWeekLeads">42,000</div><div class="l">Weekly portfolio leads</div></div>
+            <div class="res big"><div class="n" id="rWeek">$3,150</div><div class="l">Weekly residual</div></div>
+            <div class="res big"><div class="n" id="rMonth">$13,650</div><div class="l">Avg. monthly residual</div></div>
+            <div class="res big"><div class="n" id="rYear">$163,800</div><div class="l">Annualized residual</div></div>
+            <div class="res"><div class="n" id="rPerAcct">$157.50</div><div class="l">Residual per account / week</div></div>
+            <div class="res"><div class="n" id="rClient">$1,260</div><div class="l">Client weekly spend at $0.60</div></div>
+          </div>
+
+          <div class="res-title">New business income</div>
+          <div class="res-grid">
+            <div class="res gold"><div class="n" id="nPer">$210</div><div class="l">Per new account (first order)</div></div>
+            <div class="res gold"><div class="n" id="nMonth">$840</div><div class="l">New business / month</div></div>
+            <div class="res gold"><div class="n" id="nYear">$10,080</div><div class="l">New business / 12 months</div></div>
+          </div>
+
+          <div class="res-title">12-month projection (new + residual)</div>
+          <div class="proj-wrap">
+            <table class="proj">
+              <thead><tr><th>Month</th><th>Active accts</th><th>New business</th><th>Residual</th><th>Total</th></tr></thead>
+              <tbody id="projBody"></tbody>
+            </table>
+          </div>
+          <p class="note">Projection starts from 0 accounts, independent of the Active accounts slider. Accounts won in a month pay the first-order rate that month and residual from the next month on. A month is 52/12 weekly orders. Churn is applied at month end.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply">
+    <h2>Apply <span>now</span></h2>
+    <p class="lead">Tell us how to reach you and attach your resume.</p>
+    <div class="apply">
+      <form id="applyForm" novalidate>
+        <div class="hp" aria-hidden="true"><label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div><label for="fname">First name <em>*</em></label><input type="text" id="fname" name="first_name" autocomplete="given-name" required></div>
+        <div><label for="lname">Last name <em>*</em></label><input type="text" id="lname" name="last_name" autocomplete="family-name" required></div>
+        <div><label for="email">Email <em>*</em></label><input type="email" id="email" name="email" autocomplete="email" required></div>
+        <div><label for="phone">Phone <em>*</em></label><input type="tel" id="phone" name="phone" autocomplete="tel" required></div>
+        <div class="full"><label for="resume">Resume <em>*</em></label><input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required><div class="hint">PDF, DOC or DOCX. Max 5 MB.</div></div>
+        <div class="full"><label for="msg">Anything else? (optional)</label><textarea id="msg" name="message" placeholder="Insurance sales or B2B experience, current book, availability"></textarea></div>
+        <div class="full" id="formMsg" role="status" aria-live="polite"></div>
+        <div class="full"><button class="btn" type="submit" id="submitBtn">Submit application</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you will <span>do</span></h2>
+    <div class="steps">
+      <div class="step"><div class="c">1</div><b>Win agency accounts</b><span>Lead with the cost story: $0.60 against $5&ndash;$25.</span></div>
+      <div class="step"><div class="c">2</div><b>Set the weekly order</b><span>Help each agency establish a consistent 2,100-lead weekly order.</span></div>
+      <div class="step"><div class="c">3</div><b>Keep them reordering</b><span>Repeat orders pay $0.075 per lead on each order.</span></div>
+    </div>
+    <div class="final">Build the book&mdash;and keep earning as clients reorder.</div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><b>Disclosures.</b> Commission figures are illustrations, not guarantees. Actual earnings depend on signed accounts, order volume, client retention, and the applicable commission plan. *&ldquo;For the life of the account&rdquo; is subject to the governing agreement. Savings percentages are calculated from the stated prices and depend on lead source, quality, and purchasing terms. Calculator results are estimates based on the inputs you enter.</div>
+</footer>
+
+<script>
+(function () {
+  var FIRST = 0.10, RESID = 0.075, PRICE = 0.60, MIN = 2100, WPM = 52 / 12;
+  var $ = function (id) { return document.getElementById(id); };
+  var n0 = new Intl.NumberFormat('en-US');
+  var usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  var usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var money = function (v) { return Math.abs(v - Math.round(v)) < 0.005 ? usd0.format(v) : usd2.format(v); };
+
+  function calc() {
+    var accts = +$('accts').value;
+    var leads = Math.max(MIN, Math.floor(+$('leads').value) || MIN);
+    var newm = +$('newm').value;
+    var churn = +$('churn').value / 100;
+
+    $('acctsOut').textContent = accts;
+    $('leadsOut').textContent = n0.format(leads);
+    $('newmOut').textContent = newm;
+    $('churnOut').textContent = Math.round(churn * 100) + '%';
+
+    var perWeekRes = leads * RESID;
+    var weekly = accts * perWeekRes;
+    $('rWeekLeads').textContent = n0.format(accts * leads);
+    $('rWeek').textContent = money(weekly);
+    $('rMonth').textContent = money(weekly * WPM);
+    $('rYear').textContent = money(weekly * 52);
+    $('rPerAcct').textContent = money(perWeekRes);
+    $('rClient').textContent = money(leads * PRICE);
+
+    var perNew = leads * FIRST;
+    $('nPer').textContent = money(perNew);
+    $('nMonth').textContent = money(perNew * newm);
+    $('nYear').textContent = money(perNew * newm * 12);
+
+    var active = 0, tn = 0, tr = 0, rows = '';
+    for (var m = 1; m <= 12; m++) {
+      var nb = newm * perNew;
+      var rs = active * leads * RESID * WPM;
+      tn += nb; tr += rs;
+      rows += '<tr><td>' + m + '</td><td>' + (Math.round(active * 10) / 10) + '</td><td>' + money(nb) + '</td><td>' + money(rs) + '</td><td>' + money(nb + rs) + '</td></tr>';
+      active = (active + newm) * (1 - churn);
+    }
+    rows += '<tr class="total"><td>Year 1</td><td></td><td>' + money(tn) + '</td><td>' + money(tr) + '</td><td>' + money(tn + tr) + '</td></tr>';
+    $('projBody').innerHTML = rows;
+  }
+
+  ['accts', 'leads', 'newm', 'churn'].forEach(function (id) { $(id).addEventListener('input', calc); });
+  $('leads').addEventListener('blur', function () {
+    if ((+this.value || 0) < MIN) this.value = MIN;
+    calc();
+  });
+
+  /* Application form. Set FORM_ENDPOINT to the URL that receives the multipart POST. */
+  var FORM_ENDPOINT = '';
+  var MAX_BYTES = 5 * 1024 * 1024;
+  var form = $('applyForm'), msg = $('formMsg'), btn = $('submitBtn');
+  function show(cls, text) { msg.className = cls; msg.textContent = text; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.website.value) return;
+    var f = $('resume').files[0];
+    var ok = form.first_name.value.trim() && form.last_name.value.trim() &&
+      /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.value.trim()) &&
+      form.phone.value.replace(/\D/g, '').length >= 10;
+    if (!ok) return show('err', 'Enter your name, a valid email and a phone number with at least 10 digits.');
+    if (!f) return show('err', 'Attach your resume.');
+    if (!/\.(pdf|docx?)$/i.test(f.name)) return show('err', 'Resume must be a PDF, DOC or DOCX file.');
+    if (f.size > MAX_BYTES) return show('err', 'Resume must be 5 MB or smaller.');
+    if (!FORM_ENDPOINT) return show('err', 'Applications are not connected yet. Nothing was sent.');
+    btn.disabled = true; show('', '');
+    fetch(FORM_ENDPOINT, { method: 'POST', body: new FormData(form) })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); show('ok', 'Application received. We will be in touch.'); })
+      .catch(function () { show('err', 'Something went wrong. Please try again.'); })
+      .then(function () { btn.disabled = false; });
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

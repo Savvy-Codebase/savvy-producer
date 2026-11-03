@@ -1,0 +1,210 @@
+<title>Live Transfer Sequence</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Nunito+Sans:wght@400;600;800&display=swap">
+<style>
+/* Layout: one compact board. Row 1 is the main call path (teal). Row 2 holds the "nobody answers" detour (blue) under Steps 2 and 3, and the agent question under Step 4. Row 3 holds the two outcomes. Single column on phones. */
+:root{
+  color-scheme:dark;
+  --bg:#0a2530; --card:#10303b; --line:#244a56;
+  --ink:#eef4f5; --sub:#aac2c8;
+  --teal:#35c9c2; --teal-deep:#1c8f8b; --teal-soft:#0f3d43; --teal-lt:#8be6e1;
+  --blue:#5aa9ff; --blue-soft:#102e4b; --blue-lt:#b3d6ff;
+  --display:'Rubik',Arial,sans-serif; --body:'Nunito Sans',Arial,sans-serif;
+  --gx:28px; --gy:30px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p,ol{margin:0;padding:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;font-weight:700}
+.stage{max-width:1280px;margin:0 auto;padding-block:14px 12px;display:flex;flex-direction:column;gap:12px}
+.eb{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+h1{font-size:clamp(22px,2.8vw,28px);line-height:1.1;margin-top:2px}
+.lede{color:var(--sub);font-size:14px;max-width:90ch;margin-top:2px}
+
+.flow{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:var(--gx);row-gap:var(--gy)}
+.n{position:relative;display:flex;flex-direction:column;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px 14px;min-width:0}
+.hd{display:flex;align-items:center;gap:8px}
+.ic{flex:none;width:30px;height:30px;border-radius:50%;background:var(--teal-soft);border:1.5px solid var(--teal-deep);display:grid;place-items:center}
+.ic svg{width:16px;height:16px;stroke:var(--teal-lt);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.chip{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-lt)}
+.n h3{font-size:16px;line-height:1.2}
+.n p{color:var(--sub);font-size:13px;line-height:1.35}
+
+.side{background:var(--blue-soft);border-color:#2b5a8c}
+.side .ic,.no2 .ic{background:#0c2540;border-color:var(--blue)}
+.side .ic svg,.no2 .ic svg{stroke:var(--blue-lt)}
+.side .chip,.no2 .chip{color:var(--blue-lt)}
+
+.s1{grid-area:1/1} .s2{grid-area:1/2} .s3{grid-area:1/3} .s4{grid-area:1/4}
+.vm{grid-area:2/2} .cb{grid-area:2/3}
+.q{grid-area:1/5;position:relative;display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px}
+.o1{grid-area:1/6} .o2{grid-area:2/5}
+.o1::before{content:"";position:absolute;left:50%;top:calc(var(--gy) / -2);width:calc(100% + var(--gx));height:calc(var(--gy) / 2);border-left:2px dashed var(--teal);border-top:2px dashed var(--teal);border-top-left-radius:12px}
+.legend{grid-area:2/1;align-self:end;display:flex;flex-direction:column;gap:8px;color:var(--sub);font-size:12px}
+.legend span{display:flex;align-items:center;gap:10px}
+.legend i{width:20px;height:0;border-top:2px dashed var(--teal)} .legend .b i{border-color:var(--blue)}
+
+.arr{position:absolute;pointer-events:none;background-repeat:no-repeat;background-size:100% 100%}
+.dn,.bdn,.bup{left:50%;margin-left:-6px;width:12px;height:var(--gy)}
+.dn,.bdn{top:100%}
+.dn{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 40'%3E%3Cline x1='6' y1='0' x2='6' y2='31' stroke='%2335c9c2' stroke-width='2' stroke-dasharray='5 4'/%3E%3Cpolygon points='6%2C40 0%2C29 12%2C29' fill='%2335c9c2'/%3E%3C/svg%3E")} .bdn{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 40'%3E%3Cline x1='6' y1='0' x2='6' y2='31' stroke='%235aa9ff' stroke-width='2' stroke-dasharray='5 4'/%3E%3Cpolygon points='6%2C40 0%2C29 12%2C29' fill='%235aa9ff'/%3E%3C/svg%3E")}
+.bup{bottom:100%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 40'%3E%3Cline x1='6' y1='40' x2='6' y2='9' stroke='%235aa9ff' stroke-width='2' stroke-dasharray='5 4'/%3E%3Cpolygon points='6%2C0 0%2C11 12%2C11' fill='%235aa9ff'/%3E%3C/svg%3E")}
+.up{top:calc(var(--gy) * -1)}
+.rt,.brt{left:100%;top:50%;margin-top:-6px;width:var(--gx);height:12px}
+.rt{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cline x1='0' y1='6' x2='29' y2='6' stroke='%2335c9c2' stroke-width='2' stroke-dasharray='5 4'/%3E%3Cpolygon points='40%2C6 29%2C0 29%2C12' fill='%2335c9c2'/%3E%3C/svg%3E")} .brt{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cline x1='0' y1='6' x2='29' y2='6' stroke='%235aa9ff' stroke-width='2' stroke-dasharray='5 4'/%3E%3Cpolygon points='40%2C6 29%2C0 29%2C12' fill='%235aa9ff'/%3E%3C/svg%3E")}
+.lab{position:absolute;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;color:var(--blue-lt)}
+.lab.na{left:50%;top:100%;margin:6px 0 0 12px}
+.lab.rj{left:50%;bottom:100%;margin:0 0 6px 12px}
+.m{display:none}
+
+.o{gap:3px}
+.yes{background:linear-gradient(135deg,#0e5560,#0f3d43);border:2px solid var(--teal)}
+.no2{background:var(--blue-soft);border:2px solid var(--blue)}
+
+.foot{color:var(--sub);font-size:12.5px}
+.foot b{color:var(--ink)}
+
+.sc{margin-top:6px;padding-top:8px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:4px;font-size:12.5px;line-height:1.38}
+.side .sc{border-color:#2b5a8c}
+.ln{display:block;color:var(--ink)}
+.ln b{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-right:6px}
+.ln.c b{color:var(--teal-lt)} .ln.l b{color:#ffd9a0} .ln.v b,.ln.s b{color:var(--blue-lt)}
+.ln.s{color:var(--sub);font-style:italic}
+.ln .h{color:transparent}
+.q .sc{display:none}
+.o1::before{display:none}
+header{position:relative}
+.rp{position:absolute;right:0;top:0;font:700 11px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:99px;padding:3px 11px;cursor:pointer}
+.rp:hover{border-color:var(--teal)}
+.rp:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.flow.play .arr{opacity:.15;transition:opacity .4s}
+.flow.play .arr.lit{opacity:1}
+.flow.play .lab{opacity:.25;transition:opacity .4s}
+.flow.play .lab.lit{opacity:1}
+.flow.play .n,.flow.play .q{opacity:.4;transition:opacity .4s,box-shadow .3s}
+.flow.play .seen{opacity:1}
+.flow.play .o1::before{opacity:.15}
+.flow.play .o1.seen::before{opacity:1}
+.flow .act{box-shadow:0 0 0 2px var(--teal),0 0 22px rgba(53,201,194,.28)}
+.flow .side.act{box-shadow:0 0 0 2px var(--blue),0 0 22px rgba(90,169,255,.28)}
+
+@media(max-width:860px){
+  :root{--gy:34px}
+  body{font-size:17px}
+  h1{font-size:30px} .lede{font-size:16.5px} .eb{font-size:12.5px}
+  .n{padding:18px 18px 20px;gap:6px;border-radius:16px}
+  .ic{width:42px;height:42px} .ic svg{width:22px;height:22px}
+  .chip{font-size:12.5px}
+  .n h3{font-size:21px}
+  .n p{font-size:16.5px;line-height:1.45}
+  .sc{font-size:16px;gap:6px;padding-top:10px;margin-top:8px}
+  .ln b{font-size:11.5px}
+  .q{font-size:21px;padding:18px}
+  .foot{font-size:15px}
+  .rp{font-size:14px;padding:6px 14px}
+  .flow{display:flex;flex-direction:column;row-gap:var(--gy)}
+  .side{margin-left:20px}
+  .rt,.brt,.lab,.legend,.o1::before,.d{display:none}
+  .m{display:block}
+  .o2 .up{display:none}
+}
+</style>
+
+<main class="stage">
+  <header>
+    <div class="eb">Savvy Leads · Live transfer</div>
+    <h1>From first ring to your phone</h1>
+    <button class="rp" id="rp" type="button">Replay</button>
+    <p class="lede">You join once the lead has been reached, qualified and shown they want to talk to an agent.</p>
+  </header>
+
+  <ol class="flow">
+    <li id="s1" class="n s1"><span class="arr rt" aria-hidden="true"></span><span class="arr dn m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 7 23 1 17 1"/><line x1="16" y1="8" x2="23" y2="1"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="chip">Step 1</span></div>
+      <h3>Outbound call</h3><p>A call goes out to the lead.</p>
+    <div class="sc"><div class="ln s"><b>Status</b><span class="t">Ringing the lead&hellip;</span></div></div>
+    </li>
+    <li id="s2" class="n s2"><span class="arr rt" data-on="s3" aria-hidden="true"></span><span class="arr bdn" aria-hidden="true"></span><span class="lab na">No answer</span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="7.5" r="4"/><path d="M2.5 21v-1a6 6 0 0 1 6-6h3a6 6 0 0 1 6 6v1"/><polyline points="16.5 6 18.5 8 22.5 3.5"/></svg></div><span class="chip">Step 2</span></div>
+      <h3>Contact</h3><p>The lead answers the phone. If nobody answers, a voicemail is left so they can call back.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">Hi, is this Maria? You asked about life insurance coverage online.</span></div><div class="ln s"><b>Status</b><span class="t">No answer. Voicemail begins.</span></div></div>
+    </li>
+    <li id="vm" class="n side vm"><span class="arr brt" aria-hidden="true"></span><span class="arr bdn m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="13.5" x2="13" y2="13.5"/></svg></div><span class="chip">No answer</span></div>
+      <h3>Voicemail left</h3><p>A voicemail is left so the lead can call back.</p>
+    <div class="sc"><div class="ln v"><b>Voicemail</b><span class="t">Hi Maria, following up on your coverage request. Call us back at [callback number] any time today.</span></div></div>
+    </li>
+    <li id="cb" class="n side cb"><span class="arr bup" aria-hidden="true"></span><span class="lab rj">Rejoins</span><span class="arr dn m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0"/><line x1="12" y1="17" x2="16.5" y2="10"/><circle cx="12" cy="17" r="1.3"/><line x1="5" y1="11" x2="6.2" y2="11.8"/><line x1="12" y1="6.5" x2="12" y2="8"/><line x1="19" y1="11" x2="17.8" y2="11.8"/></svg></div><span class="chip">Callback</span></div>
+      <h3>Lead calls back</h3><p>The lead calls back and has the qualifying conversation, then rejoins at Step 3.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">Thanks for calling back, Maria. I just have a few quick questions.</span></div><div class="ln l"><b>Lead</b><span class="t">Sure, go ahead.</span></div></div>
+    </li>
+    <li id="s3" class="n s3"><span class="arr rt" aria-hidden="true"></span><span class="arr dn m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="11.5" r="4.5"/><circle cx="18.5" cy="11.5" r="4.5"/><line x1="5.5" y1="16" x2="18.5" y2="16"/></svg></div><span class="chip">Step 3</span></div>
+      <h3>Qualifying conversation</h3><p>A short conversation checks age range, state and coverage need.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">What state are you in, and roughly what age range?</span></div><div class="ln l"><b>Lead</b><span class="t">Kentucky, mid fifties.</span></div></div>
+    </li>
+    <li id="s4" class="n s4"><span class="arr rt" aria-hidden="true"></span><span class="arr dn m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 2 16 8 22 8"/><line x1="23" y1="1" x2="16" y2="8"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="chip">Step 4</span></div>
+      <h3>Buyer intent measurement</h3><p>The call measures whether the lead wants to speak with an agent now.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">Would you like to speak with a licensed agent right now?</span></div><div class="ln l"><b>Lead</b><span class="t">Yes, please.</span></div></div>
+    </li>
+    <li id="q" class="q"><span class="arr rt" aria-hidden="true"></span>Is an agent available?</li>
+    <li id="o1" class="n o yes o1"><span class="arr dn up m" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="19 1 23 5 19 9"/><line x1="15" y1="5" x2="23" y2="5"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="chip">Yes</span></div>
+      <h3>Transfer to agent</h3><p>The lead is connected to you live, already qualified.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">Great, I am connecting you to a licensed agent now.</span></div></div>
+    </li>
+    <li id="o2" class="n o no2 o2"><span class="arr dn up" aria-hidden="true"></span>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/><polyline points="8.5 15.5 11 18 15.5 13"/></svg></div><span class="chip">No</span></div>
+      <h3>Booked to your calendar</h3><p>A callback is set for the same day, so the lead is not lost.</p>
+    <div class="sc"><div class="ln c"><b>Caller</b><span class="t">No agent is free right now. What time today works for a callback?</span></div><div class="ln l"><b>Lead</b><span class="t">Around four.</span></div></div>
+    </li>
+    <li class="legend" aria-hidden="true"><span><i></i>Main call path</span><span class="b"><i></i>If nobody answers</span></li>
+  </ol>
+
+  <footer class="foot"><b>You decide</b> when you are available. The sequence handles the rest. Sample script wording is a draft.</footer>
+</main>
+<script>
+(function(){
+var flow=document.querySelector('.flow'),btn=document.getElementById('rp');
+var order=['s1','s2','vm','cb','s3','s4','q','o1','o2'];
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var lines=[].slice.call(document.querySelectorAll('.ln .t'));
+lines.forEach(function(t){t.dataset.full=t.textContent;});
+function setText(t,n){var f=t.dataset.full;t.innerHTML='';var a=document.createElement('span');a.textContent=f.slice(0,n);var b=document.createElement('span');b.className='h';b.textContent=f.slice(n);t.appendChild(a);t.appendChild(b);}
+function showAll(){lines.forEach(function(t){t.textContent=t.dataset.full;});}
+var run=0;
+function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function type(t,id){return new Promise(function(res){var n=0,f=t.dataset.full.length;(function step(){if(id!==run)return res();n+=2;setText(t,Math.min(n,f));if(n>=f)return res();setTimeout(step,22);})();});}
+function light(id){
+  [].forEach.call(flow.querySelectorAll('.arr,.lab'),function(a){
+    var on=a.dataset.on,own=a.closest('.n,.q');
+    if(on?on===id:(own&&own.id===id))a.classList.add('lit');
+  });
+}
+async function play(){
+  var id=++run;
+  flow.classList.add('play');
+  [].forEach.call(flow.querySelectorAll('.seen,.act,.lit'),function(e){e.classList.remove('seen','act','lit');});
+  lines.forEach(function(t){setText(t,0);});
+  await wait(500);
+  for(var i=0;i<order.length;i++){
+    if(id!==run)return;
+    var el=document.getElementById(order[i]);
+    [].forEach.call(flow.querySelectorAll('.act'),function(e){e.classList.remove('act');});
+    el.classList.add('seen','act');light(order[i]);
+    var ts=[].slice.call(el.querySelectorAll('.t'));
+    await wait(350);
+    for(var j=0;j<ts.length;j++){await type(ts[j],id);if(id!==run)return;await wait(450);}
+    await wait(500);
+  }
+  [].forEach.call(flow.querySelectorAll('.act'),function(e){e.classList.remove('act');});
+  flow.classList.remove('play');
+}
+btn.addEventListener('click',function(){if(reduce){return;}play();});
+if(reduce){btn.hidden=true;}else{play();}
+})();
+</script>
+

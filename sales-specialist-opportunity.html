@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>B2B Lead Generation Sales Specialist</title>
+<style>
+  @page { size: 8.5in 14in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f172a; --muted: #475569; --line: #e2e8f0;
+    --navy: #0b1f3a; --accent: #14b8a6; --accent-d: #0f766e;
+    --gold: #f59e0b; --soft: #f1f5f9; --bad: #b91c1c;
+  }
+  body { font-family: "Liberation Sans", Arial, Helvetica, sans-serif; color: var(--ink);
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 10.5pt; line-height: 1.45; }
+  .page { width: 8.5in; height: 14in; position: relative; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  /* hero */
+  .hero { background: linear-gradient(135deg, #0b1f3a 0%, #0f766e 100%); color: #fff;
+          padding: 0.3in 0.65in 0.4in; position: relative; }
+  .hero::after { content: ""; position: absolute; right: -0.8in; top: -0.8in; width: 3.2in; height: 3.2in;
+          border-radius: 50%; background: radial-gradient(circle, rgba(20,184,166,.35), transparent 70%); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: 8.5pt; color: var(--accent); font-weight: 700; }
+  h1 { font-size: 26pt; line-height: 1.08; margin: 8pt 0 10pt; letter-spacing: -.01em; }
+  .tag { font-size: 14pt; color: #cbd5e1; font-weight: 400; max-width: 5.6in; }
+  .tag b { color: #fff; }
+
+  .stats { display: flex; gap: 10pt; margin: -0.38in 0.65in 0; position: relative; z-index: 2; }
+  .stat { flex: 1; background: #fff; border-radius: 10pt; padding: 12pt 12pt 10pt;
+          box-shadow: 0 6pt 18pt rgba(15,23,42,.15); border-top: 3pt solid var(--accent); }
+  .stat .n { font-size: 21pt; font-weight: 800; color: var(--navy); line-height: 1; }
+  .stat .l { font-size: 8pt; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 4pt; }
+
+  .body { zoom: .84; padding: 0.14in 0.774in 0; }
+  h2 { font-size: 15pt; color: var(--navy); margin-bottom: 4pt; }
+  h2 span { color: var(--accent-d); }
+  p.lead { color: var(--muted); margin-bottom: 10pt; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1pt solid var(--line);
+          border-radius: 8pt; overflow: hidden; font-size: 9.6pt; }
+  th { background: var(--navy); color: #fff; text-align: left; padding: 7pt 9pt; font-weight: 700; font-size: 8.8pt;
+       text-transform: uppercase; letter-spacing: .06em; }
+  th.us { background: var(--accent-d); }
+  td { padding: 5pt 9pt; border-top: 1pt solid var(--line); vertical-align: top; }
+  td:first-child { font-weight: 700; color: var(--navy); width: 24%; }
+  td.them { color: var(--bad); }
+  td.us { background: #f0fdfa; font-weight: 700; color: var(--accent-d); }
+  tr.hl td { font-size: 10.5pt; }
+
+  .callout { margin-top: 10pt; background: var(--soft); border-left: 4pt solid var(--gold); border-radius: 6pt;
+             padding: 9pt 12pt; font-size: 10pt; }
+  .callout b { color: var(--navy); }
+
+  /* page 2 */
+  .p2 { zoom: .72; padding: 0.05in 0.903in 0; }
+  .earn { display: flex; gap: 12pt; margin: 8pt 0 10pt; }
+  .card { flex: 1; border: 1pt solid var(--line); border-radius: 10pt; padding: 14pt; }
+  .card.dark { background: linear-gradient(135deg,#0b1f3a,#0f766e); color: #fff; border: none; }
+  .card .k { text-transform: uppercase; letter-spacing: .12em; font-size: 8pt; color: var(--accent); font-weight: 700; }
+  .card .v { font-size: 30pt; font-weight: 800; line-height: 1.05; margin: 4pt 0 2pt; }
+  .card .v small { font-size: 11pt; font-weight: 600; opacity: .7; }
+  .card .d { font-size: 9.5pt; opacity: .85; }
+  .card.dark .d { color: #cbd5e1; opacity: 1; }
+
+  .proj { background: linear-gradient(180deg, #f0fdfa, #fff); border: 1pt solid #99f6e4; border-radius: 12pt; padding: 12pt; margin-bottom: 10pt; }
+  .proj h3 { color: var(--navy); font-size: 12.5pt; margin-bottom: 2pt; }
+  .proj .sub { color: var(--muted); font-size: 9.5pt; margin-bottom: 12pt; }
+  .bars { display: flex; gap: 10pt; }
+  .bar { flex: 1; background: #fff; border: 1pt solid var(--line); border-radius: 8pt; padding: 10pt; text-align: center; }
+  .bar .n { font-size: 17pt; font-weight: 800; color: var(--accent-d); }
+  .bar .l { font-size: 8pt; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-top: 3pt; }
+  .math { margin-top: 10pt; font-size: 9pt; color: var(--muted); text-align: center; }
+
+  .steps { display: flex; gap: 10pt; margin: 8pt 0 14pt; }
+  .step { flex: 1; }
+  .step .c { width: 24pt; height: 24pt; border-radius: 50%; background: var(--accent); color: #fff;
+             font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 5pt; }
+  .step b { color: var(--navy); display: block; font-size: 10.5pt; }
+  .step span { color: var(--muted); font-size: 9.3pt; }
+
+  .fine { margin: 8pt 0.65in 0; font-size: 8pt; color: var(--muted);
+          border-top: 1pt solid var(--line); padding-top: 8pt; }
+  .fine b { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="hero">
+    <div class="eyebrow">Now hiring &middot; Recurring commission</div>
+    <h1>B2B Lead Generation<br>Sales Specialist</h1>
+    <div class="tag"><b>Build a portfolio. Earn on every reorder.</b></div><div style="display:inline-block;margin-top:14pt;background:var(--gold);color:#1c1917;font-weight:800;font-size:9.5pt;letter-spacing:.1em;text-transform:uppercase;padding:6pt 14pt;border-radius:20pt">Open role &middot; B2B sales</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">$0.60</div><div class="l">Price per lead</div></div>
+    <div class="stat"><div class="n">2,100</div><div class="l">Lead weekly minimum</div></div>
+    <div class="stat"><div class="n">7 days</div><div class="l">Paced delivery</div></div>
+    <div class="stat"><div class="n">88&ndash;98%</div><div class="l">Lower than comparison range</div></div>
+  </div>
+
+  <div class="body">
+    <h2>A clear value story <span>for agency owners</span></h2>
+    <p class="lead">Insurance agencies often pay $5&ndash;$25 per lead for shared prospects and compete to contact them first. Our real-time insurance leads are priced at $0.60 each, with orders delivered at a steady pace over seven days.</p>
+
+    <table>
+      <tr><th>Cost factor</th><th>Traditional shared leads</th><th class="us">Our model</th></tr>
+      <tr class="hl"><td>Price per lead</td><td class="them">$5.00&ndash;$25.00</td><td class="us">$0.60</td></tr>
+      <tr><td>Competition</td><td>Often shared among multiple agents</td><td class="us">Real-time leads with paced delivery</td></tr>
+      <tr><td>Weekly volume</td><td>Varies by budget and source</td><td class="us">2,100-lead minimum</td></tr>
+      <tr><td>Delivery</td><td>May arrive in a concentrated batch</td><td class="us">Spread across seven days</td></tr>
+      <tr class="hl"><td>Weekly cost at 2,100 leads</td><td class="them">$10,500&ndash;$52,500</td><td class="us">$1,260</td></tr>
+    </table>
+
+    <div class="callout"><b>The headline:</b> at these stated prices, our leads cost approximately <b>88%&ndash;98% less</b> than the comparison range. Actual savings depend on the lead source, quality, and purchasing terms.</div>
+
+    <h2 style="margin-top:16pt">The <span>role</span></h2>
+    <p class="lead" style="margin-bottom:0">Help agencies lower their lead costs while building a client portfolio that can generate recurring commission. Your work is to win agency accounts and help them establish a consistent weekly order. As your portfolio grows, repeat orders can add a meaningful recurring income stream.</p>
+  </div>
+  <div class="p2">
+    <div style="border-top:1pt solid var(--line);margin-bottom:14pt"></div><div class="eyebrow" style="color:var(--accent-d)">How you earn</div>
+    <h2 style="font-size:19pt;margin:4pt 0 0">Paid per lead. <span>Again on every reorder.</span></h2>
+
+    <div class="earn">
+      <div class="card">
+        <div class="k" style="color:var(--accent-d)">First order</div>
+        <div class="v" style="color:var(--navy)">$0.10 <small>per lead</small></div>
+        <div class="d" style="color:var(--muted)">Paid on the opening order from each new account you win.</div>
+      </div>
+      <div class="card dark">
+        <div class="k">Repeat &amp; recurring orders</div>
+        <div class="v">$0.075 <small>per lead</small></div>
+        <div class="d">On each order, for the life of the account.*</div>
+      </div>
+    </div>
+
+    <div class="proj">
+      <h3>What 20 active accounts could generate</h3>
+      <div class="sub">Illustration: each of 20 clients orders the 2,100-lead weekly minimum.</div>
+      <div class="bars">
+        <div class="bar"><div class="n">42,000</div><div class="l">Weekly portfolio leads</div></div>
+        <div class="bar"><div class="n">$3,150</div><div class="l">Weekly residual</div></div>
+        <div class="bar"><div class="n">$13,650</div><div class="l">Avg. monthly residual</div></div>
+        <div class="bar"><div class="n">$163,800</div><div class="l">Annualized residual</div></div>
+      </div>
+      <div class="math">20 clients &times; 2,100 leads = 42,000 &nbsp;&middot;&nbsp; 42,000 &times; $0.075 = $3,150/wk &nbsp;&middot;&nbsp; &times; 52 weeks = $163,800/yr &nbsp;&middot;&nbsp; &divide; 12 = $13,650/mo</div>
+    </div>
+
+    <h2>What you will <span>do</span></h2>
+    <div class="steps">
+      <div class="step"><div class="c">1</div><b>Win agency accounts</b><span>Lead with the cost story: $0.60 against $5&ndash;$25.</span></div>
+      <div class="step"><div class="c">2</div><b>Set the weekly order</b><span>Help each agency establish a consistent 2,100-lead weekly order.</span></div>
+      <div class="step"><div class="c">3</div><b>Keep them reordering</b><span>Repeat orders pay $0.075 per lead on each order.</span></div>
+    </div>
+
+    <div class="callout" style="text-align:center;font-size:12pt;border-left-color:var(--accent)"><b>Build the book&mdash;and keep earning as clients reorder.</b></div>
+  </div>
+
+  <div class="fine">
+    <b>Disclosures.</b> Commission figures are illustrations, not guarantees. Actual earnings depend on signed accounts, order volume, client retention, and the applicable commission plan. *&ldquo;For the life of the account&rdquo; is subject to the governing agreement. Savings percentages are calculated from the stated prices above and depend on lead source, quality, and purchasing terms.
+  </div>
+</section>
+
+</body>
+</html>

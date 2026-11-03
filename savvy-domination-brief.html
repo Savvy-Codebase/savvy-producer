@@ -1,0 +1,220 @@
+<title>Savvy Leads Domination Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Nunito+Sans:wght@400;600;800&display=swap">
+<style>
+/* Layout: one US Legal sheet (8.5 x 14 in). Navy masthead, standings and evidence up top, the 26-item fix list in eight colored steps below, targets and caveats at the foot. */
+:root{
+  --desk:#dfe3ea; --paper:#fbfcfc; --ink:#0b2a33; --muted:#4d6068; --rule:#d9e1e3;
+  --navy:#0b2a33; --navy-ink:#f3f7f7; --navy-sub:#b9cdd2;
+  --teal:#0e8f8a; --teal-soft:#d6f0ee; --teal-ink:#075c58; --teal-lt:#8be6e1; --bar:#8a9aa3;
+  --c1:var(--teal-soft); --c2:var(--teal); --c3:var(--teal-soft); --c4:var(--teal-soft); --c5:var(--teal-soft); --c6:var(--teal-soft); --c7:var(--teal-soft); --c8:var(--teal-soft);
+  --yes-bg:#d9f2e3; --yes-ink:#14683a; --no-bg:#fbdcdc; --no-ink:#8c1f1f; --part-bg:#fff3c4; --part-ink:#6b5000;
+  --us-bg:#e6f5f4;
+  --display:'Rubik',Arial,sans-serif; --body:'Nunito Sans',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#0d1220;color-scheme:dark}}
+:root[data-theme="dark"]{--desk:#0d1220;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font:13px/1.45 var(--body);padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+@page{size:8.5in 14in;margin:0}
+.sheet{background:var(--paper);color:var(--ink);width:8.5in;max-width:100%;min-height:14in;margin:0 auto;box-shadow:0 6px 30px rgba(10,16,32,.28);display:flex;flex-direction:column}
+@media print{body{background:#fff;padding:0}.sheet{box-shadow:none;width:8.5in;min-height:14in}}
+
+.mast{background:var(--navy);color:var(--navy-ink);padding:26px 0.5in 22px;display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;justify-content:space-between;border-bottom:6px solid var(--teal)}
+.mast .eb{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt)}
+.mast h1{font-size:34px;font-weight:800;line-height:1.05;margin-top:6px}
+.mast p{color:var(--navy-sub);margin-top:8px;max-width:46ch;font-size:13px}
+.jump{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800}
+.jump .n{font-size:46px;line-height:1}
+.jump .a{font-size:26px;color:var(--teal-lt)}
+.jump small{display:block;font-family:var(--body);font-weight:600;font-size:11px;color:var(--navy-sub);letter-spacing:.04em}
+
+.body{padding:18px 0.5in 22px;display:flex;flex-direction:column;gap:18px;flex:1}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h2{font-size:18px;font-weight:800;margin-top:2px}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:640px){.top{grid-template-columns:1fr}}
+
+.bars{display:grid;gap:6px;margin-top:10px}
+.bar{display:grid;grid-template-columns:150px 1fr 30px;gap:8px;align-items:center;font-size:12.5px}
+.bar .t{height:14px;background:#e8ebf2;border-radius:99px;overflow:hidden}
+.bar .f{height:100%;width:calc(var(--v)*10%);background:var(--bar);border-radius:99px}
+.bar b{font-variant-numeric:tabular-nums;text-align:right}
+.bar.us{font-weight:800}.bar.us .f{background:var(--teal)}
+.bar.est .f{background:repeating-linear-gradient(135deg,var(--teal) 0 7px,var(--teal-lt) 7px 14px)}
+@media(max-width:420px){.bar{grid-template-columns:110px 1fr 28px}}
+.note{font-size:11.5px;color:var(--muted);margin-top:8px}
+
+.facts{display:grid;gap:8px;margin-top:10px}
+.fact{border-left:5px solid var(--teal);background:var(--us-bg);padding:8px 12px;border-radius:0 8px 8px 0}
+.fact b{font-family:var(--display)}
+
+.tw{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{padding:6px 8px;text-align:center;border-bottom:1px solid var(--rule)}
+th{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#f3f5f9}
+th:first-child,td:first-child{text-align:left;font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.col-us{background:var(--us-bg)}
+th.col-us{background:var(--teal-soft);color:var(--teal-ink)}
+.p{display:inline-block;padding:1px 8px;border-radius:99px;font-weight:800;font-size:11px}
+.y{background:var(--yes-bg);color:var(--yes-ink)}.n{background:var(--no-bg);color:var(--no-ink)}.m{background:var(--part-bg);color:var(--part-ink)}
+
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media(max-width:640px){.steps{grid-template-columns:1fr}}
+.step{border:1px solid var(--rule);border-radius:10px;overflow:hidden;min-width:0}
+.step h3{font-size:13.5px;font-weight:800;padding:6px 12px;display:flex;gap:8px;align-items:baseline;background:var(--teal-soft);color:var(--teal-ink);border-bottom:1px solid var(--rule)}
+.step h3 span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-left:auto}
+.step ul{list-style:none;margin:0;padding:8px 12px 10px;display:grid;gap:5px}
+.step li{display:grid;grid-template-columns:16px 22px 1fr;gap:4px;align-items:start;font-size:12.5px}
+.step li i{width:12px;height:12px;border:1.5px solid var(--ink);border-radius:3px;margin-top:3px}
+.step li i.done{background:var(--ink)}
+.step li em{font-style:normal;font-weight:800;color:var(--muted)}
+.step li s{text-decoration:none;font-weight:800}
+.gate{font-size:10.5px;font-weight:800;background:var(--ink);color:var(--paper);padding:0 6px;border-radius:4px;margin-left:4px;letter-spacing:.06em}
+
+.foot{display:grid;grid-template-columns:1fr 1fr;gap:22px;border-top:2px solid var(--ink);padding-top:14px}
+@media(max-width:640px){.foot{grid-template-columns:1fr}}
+.foot ul{margin:6px 0 0;padding-left:18px}.foot li{margin:3px 0;font-size:12.5px}
+.fine{font-size:10.5px;color:var(--muted);line-height:1.4;border-top:1px solid var(--rule);padding-top:8px}
+</style>
+
+<main class="sheet">
+  <header class="mast">
+    <div>
+      <div class="eb">Savvy Leads · Final Expense lead vendors · October 2026</div>
+      <h1>Domination Brief</h1>
+      <p>Where Savvy stands against five rivals, and the 26 fixes that take it to first place.</p>
+    </div>
+    <div class="jump" aria-label="Score 5.4 today, about 6.8 after the fixes">
+      <div><div class="n">5.4</div><small>TODAY, 5TH OF 6</small></div>
+      <div class="a" aria-hidden="true">→</div>
+      <div><div class="n" style="color:var(--teal-lt)">6.8</div><small>AFTER THE FIXES (ESTIMATE)</small></div>
+    </div>
+  </header>
+
+  <div class="body">
+    <section class="top">
+      <div>
+        <div class="lbl">Where we stand</div>
+        <h2>Overall score, out of 10</h2>
+        <div class="bars" role="list">
+          <div class="bar" role="listitem"><span>Caboom Leads</span><div class="t"><div class="f" style="--v:6.9"></div></div><b>6.9</b></div>
+          <div class="bar est" role="listitem"><span>Savvy after fixes + dialer</span><div class="t"><div class="f" style="--v:6.8"></div></div><b>6.8</b></div>
+          <div class="bar" role="listitem"><span>Live Transfer Experts</span><div class="t"><div class="f" style="--v:6.1"></div></div><b>6.1</b></div>
+          <div class="bar" role="listitem"><span>Bang Bang Leads</span><div class="t"><div class="f" style="--v:5.9"></div></div><b>5.9</b></div>
+          <div class="bar" role="listitem"><span>Aged Lead Store</span><div class="t"><div class="f" style="--v:5.7"></div></div><b>5.7</b></div>
+          <div class="bar us" role="listitem"><span>Savvy Leads today</span><div class="t"><div class="f" style="--v:5.4"></div></div><b>5.4</b></div>
+          <div class="bar" role="listitem"><span>Speakeasy Leads</span><div class="t"><div class="f" style="--v:4.8"></div></div><b>4.8</b></div>
+        </div>
+        <p class="note">Savvy today: content and credibility 4.0, design 6.5, product 5.8. The striped bar is an estimate, not a measurement.</p>
+      </div>
+      <div>
+        <div class="lbl">The read</div>
+        <h2>The gap is trust, not product</h2>
+        <div class="facts">
+          <div class="fact"><b>Gap to first: about 1.5 points.</b> Almost all of it sits in content and credibility (4.0 against Caboom's 7.0).</div>
+          <div class="fact"><b>What the higher scorers share.</b> A named person or a phone and address, a written bad-lead promise, and some social proof.</div>
+          <div class="fact"><b>What only Savvy has.</b> Consent data named (TrustedForm, Jornaya), a lead map with about 129,000 overflow leads, and visible per-lead prices.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="lbl">The evidence</div>
+      <h2>What a buyer can see on each site</h2>
+      <div class="tw"><table>
+        <thead><tr><th></th><th class="col-us">Savvy</th><th>Caboom</th><th>Live Transfer</th><th>Bang Bang</th><th>Aged Lead</th><th>Speakeasy</th></tr></thead>
+        <tbody>
+          <tr><td>Named owner</td><td class="col-us"><span class="p n">No</span></td><td><span class="p y">Yes</span></td><td><span class="p n">No</span></td><td><span class="p y">Yes</span></td><td><span class="p n">No</span></td><td><span class="p n">No</span></td></tr>
+          <tr><td>Phone</td><td class="col-us"><span class="p n">No</span></td><td><span class="p n">No</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td><td><span class="p n">No</span></td></tr>
+          <tr><td>Address</td><td class="col-us"><span class="p n">No</span></td><td><span class="p n">No</span></td><td><span class="p y">Yes</span></td><td><span class="p n">No</span></td><td><span class="p n">No</span></td><td><span class="p n">No</span></td></tr>
+          <tr><td>Reviews on site</td><td class="col-us"><span class="p n">No</span></td><td><span class="p y">232</span></td><td><span class="p n">No</span></td><td><span class="p m">Claimed</span></td><td><span class="p y">Yes</span></td><td><span class="p n">No</span></td></tr>
+          <tr><td>Consent proof named</td><td class="col-us"><span class="p y">Yes</span></td><td><span class="p m">TCPA</span></td><td><span class="p m">TCPA</span></td><td><span class="p n">No</span></td><td><span class="p n">No</span></td><td><span class="p m">TCPA</span></td></tr>
+          <tr><td>Bad-lead policy</td><td class="col-us"><span class="p n">No</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td><td><span class="p y">Yes</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">“No” means not found on the pages read in October 2026, not that it does not exist. Savvy’s footer pages returned 404. Price check: Savvy’s targeted lead is $15 against Bang Bang’s $12. Live transfer is planned at $49.</p>
+    </section>
+
+    <section>
+      <div class="lbl">The fix list</div>
+      <h2>26 fixes in eight steps, in order</h2>
+      <div class="steps">
+        <div class="step" style="--c:var(--c1)"><h3>1 · Decide first</h3>
+          <ul>
+            <li><i class="done"></i><em>1</em><span>Jason Richter is the owner. <s>Done.</s></span></li>
+            <li><i></i><em>2</em><span>Legal entity name and mailing address</span></li>
+            <li><i></i><em>3</em><span>Stack decision for calling, with the open Voxr questions</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c2)"><h3>2 · Trust <span>Gates</span></h3>
+          <ul>
+            <li><i></i><em>4</em><span>Fix the 404 footer pages <b class="gate">GATE</b></span></li>
+            <li><i></i><em>5</em><span>Show who is behind it</span></li>
+            <li><i></i><em>6</em><span>800 number, with its routing decided</span></li>
+            <li><i></i><em>7</em><span>Bad-lead and refund terms</span></li>
+            <li><i></i><em>8</em><span>Define “exclusive” in writing</span></li>
+            <li><i></i><em>9</em><span>Consent proof for every tier, plus a Jornaya explainer <b class="gate">GATE</b></span></li>
+            <li><i></i><em>10</em><span>“Safe to call and text” page, written with counsel</span></li>
+            <li><i></i><em>11</em><span>Answer the FAQ</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c3)"><h3>3 · Pricing</h3>
+          <ul>
+            <li><i></i><em>12</em><span>One price table for every product</span></li>
+            <li><i></i><em>13</em><span>Justify $15 against $12 and the cheap real-time feed</span></li>
+            <li><i></i><em>14</em><span>State delivery timing, including GoHighLevel</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c4)"><h3>4 · Jason Richter’s bio</h3>
+          <ul>
+            <li><i></i><em>15</em><span>Collect his verified facts</span></li>
+            <li><i></i><em>16</em><span>Write a short and a long bio</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c5)"><h3>5 · Live transfer at $49</h3>
+          <ul>
+            <li><i></i><em>17</em><span>Build the $49 product</span></li>
+            <li><i></i><em>18</em><span>Pilot it, price the bundle, publish the results</span></li>
+            <li><i></i><em>19</em><span>Tag leads and turn outcomes into claims</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c6)"><h3>6 · Chatbot and sales bot</h3>
+          <ul>
+            <li><i></i><em>20</em><span>Live chatbot on the site. It is a bot, not a person, and says so.</span></li>
+            <li><i></i><em>21</em><span>Inside sales bot for orders and questions <b class="gate">Needs 4–14</b></span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c7)"><h3>7 · Proof and homepage</h3>
+          <ul>
+            <li><i></i><em>22</em><span>Real reviews</span></li>
+            <li><i></i><em>23</em><span>Map screenshot, sample lead card, navy palette</span></li>
+            <li><i></i><em>24</em><span>Keep Savvy’s edges up front</span></li>
+          </ul></div>
+        <div class="step" style="--c:var(--c8)"><h3>8 · Final review</h3>
+          <ul>
+            <li><i></i><em>25</em><span>Counsel reviews consent, TCPA and recording wording</span></li>
+            <li><i></i><em>26</em><span>Re-score Savvy against the same five rivals</span></li>
+          </ul></div>
+      </div>
+    </section>
+
+    <section class="foot">
+      <div>
+        <div class="lbl">Targets</div>
+        <ul>
+          <li>Content and credibility: <b>4.0 → about 6.5</b></li>
+          <li>Overall: <b>5.4 → about 6.2</b> after the trust fixes, <b>about 6.8</b> with the dialer</li>
+          <li>Level with Caboom (6.9), within the margin of judgment</li>
+        </ul>
+      </div>
+      <div>
+        <div class="lbl">Rules for every claim</div>
+        <ul>
+          <li>Nothing goes live that Jason cannot back up.</li>
+          <li>Counsel signs off on every compliance statement.</li>
+          <li>Pilot data replaces the live transfer assumptions before the model is trusted.</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="fine">Scores are judgment from public pages in October 2026. Nothing was bought and no delivery was tested. The Savvy and Bang Bang scores come from the earlier head-to-head report. The other four are new, so treat gaps under half a point as ties. Sources: lead vendor scoreboard, lead vendor showdown and the live transfer margin model. Full detail in dominate-checklist.md.</p>
+  </div>
+</main>

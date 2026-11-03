@@ -1,0 +1,177 @@
+<title>Savvy Leads Roadmap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Nunito+Sans:wght@400;600;800&display=swap">
+<style>
+/* Layout: navy masthead, then five stage columns left to right. Each column lists its fixes under workstream tags and ends in the gate that unlocks the next stage. */
+:root{
+  --bg:#eef2f3; --paper:#fbfcfc; --ink:#0b2a33; --muted:#4d6068; --rule:#d9e1e3;
+  --navy:#0b2a33; --navy2:#16424c; --navy-ink:#f3f7f7; --navy-sub:#b9cdd2;
+  --teal:#0e8f8a; --teal-soft:#d6f0ee; --teal-ink:#075c58; --teal-lt:#8be6e1;
+  --gold:#f2b705; --gold-soft:#fff3c4; --gold-ink:#6b5000;
+  --t-trust:#0e8f8a; --t-price:#5b7a99; --t-bio:#7a6a9e; --t-prod:#b0622f;
+  --display:'Rubik',Arial,sans-serif; --body:'Nunito Sans',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c161a; --paper:#142329; --ink:#eaf0f2; --muted:#9db0b9; --rule:#2a3d45;
+  --teal:#35c9c2; --teal-soft:#12413f; --teal-ink:#8be6e1;
+  --gold-soft:#3d3210; --gold-ink:#f7dc8a;
+  --t-trust:#35c9c2; --t-price:#8fb0d2; --t-bio:#b3a5d6; --t-prod:#e39a68;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c161a; --paper:#142329; --ink:#eaf0f2; --muted:#9db0b9; --rule:#2a3d45;
+  --teal:#35c9c2; --teal-soft:#12413f; --teal-ink:#8be6e1;
+  --gold-soft:#3d3210; --gold-ink:#f7dc8a;
+  --t-trust:#35c9c2; --t-price:#8fb0d2; --t-bio:#b3a5d6; --t-prod:#e39a68;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+.mast{background:linear-gradient(135deg,var(--navy),var(--navy2));color:var(--navy-ink);padding-block:40px 32px;border-bottom:6px solid var(--teal)}
+.eb{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lt)}
+.mast h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.05;margin-top:8px}
+.mast p{color:var(--navy-sub);max-width:62ch;margin-top:10px;font-size:17px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:13.5px;color:var(--navy-sub)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+.road{padding-block:28px 40px}
+.line{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+@media(max-width:1100px){.line{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.line{grid-template-columns:1fr}}
+
+.stage{background:var(--paper);border:1px solid var(--rule);border-radius:14px;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.stage header{padding:14px 14px 12px;border-bottom:1px solid var(--rule);background:var(--teal-soft)}
+.stage .k{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink)}
+.stage h2{font-size:20px;font-weight:800;margin-top:2px;color:var(--ink)}
+.stage header p{font-size:13px;color:var(--muted);margin-top:4px}
+.stage ul{list-style:none;margin:0;padding:12px 14px;display:grid;gap:10px;flex:1;align-content:start}
+.it{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;font-size:14px;line-height:1.35}
+.it .no{font-family:var(--display);font-weight:800;font-size:12px;color:#fff;background:var(--tag);border-radius:6px;text-align:center;padding:2px 0;margin-top:1px;font-variant-numeric:tabular-nums}
+.it small{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--tag);margin-bottom:1px}
+.it.done .no{background:var(--muted)}
+.it.done b{text-decoration:line-through;text-decoration-thickness:1px}
+.trust{--tag:var(--t-trust)}.price{--tag:var(--t-price)}.bio{--tag:var(--t-bio)}.prod{--tag:var(--t-prod)}
+.gate{margin:0;padding:10px 14px;background:var(--gold-soft);color:var(--gold-ink);font-size:13px;font-weight:600;border-top:1px solid var(--rule)}
+.gate b{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:11px;display:block}
+
+.bottom{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:16px}
+.box h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.box ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}.box li{margin:4px 0}
+.box li b{color:var(--ink)}
+.score{display:flex;align-items:baseline;gap:10px;font-family:var(--display);font-weight:800}
+.score .n{font-size:40px;line-height:1}.score .a{color:var(--teal);font-size:22px}
+.fine{margin-top:16px;font-size:12.5px;color:var(--muted);max-width:90ch}
+</style>
+
+<header class="mast"><div class="wrap">
+  <div class="eb">Savvy Leads · October 2026</div>
+  <h1>Roadmap to first place</h1>
+  <p>The 26 fixes in five stages. A stage opens when the gate before it is met, so the order carries the plan. Dates are not set yet: that needs your hours and the answers to stage 1.</p>
+  <div class="legend" aria-label="Workstream key">
+    <span><i style="background:#35c9c2"></i>Trust and compliance</span>
+    <span><i style="background:#8fb0d2"></i>Pricing and proof</span>
+    <span><i style="background:#b3a5d6"></i>Jason’s bio</span>
+    <span><i style="background:#e39a68"></i>Products and bots</span>
+  </div>
+</div></header>
+
+<main class="wrap road">
+  <div class="line">
+
+    <section class="stage">
+      <header><div class="k">Stage 1</div><h2>Decide</h2><p>Three answers that unblock the rest.</p></header>
+      <ul>
+        <li class="it trust done"><span class="no">1</span><div><small>Trust</small><b>Jason Richter is the owner</b></div></li>
+        <li class="it trust"><span class="no">2</span><div><small>Trust</small>Legal entity name and mailing address</div></li>
+        <li class="it prod"><span class="no">3</span><div><small>Products</small>Stack decision for calling, and the open Voxr questions</div></li>
+      </ul>
+      <p class="gate"><b>Opens stage 2 when</b>Name, address and stack are settled.</p>
+    </section>
+
+    <section class="stage">
+      <header><div class="k">Stage 2</div><h2>Build trust</h2><p>The pages and promises a skeptical agent looks for.</p></header>
+      <ul>
+        <li class="it trust"><span class="no">4</span><div><small>Trust · gate</small>Fix the 404 footer pages</div></li>
+        <li class="it trust"><span class="no">5</span><div><small>Trust</small>Show who is behind it</div></li>
+        <li class="it trust"><span class="no">6</span><div><small>Trust</small>800 number and its routing</div></li>
+        <li class="it trust"><span class="no">7</span><div><small>Trust</small>Bad-lead and refund terms</div></li>
+        <li class="it trust"><span class="no">8</span><div><small>Trust</small>Define “exclusive” in writing</div></li>
+        <li class="it trust"><span class="no">11</span><div><small>Trust</small>Answer the FAQ</div></li>
+        <li class="it bio"><span class="no">15</span><div><small>Bio</small>Collect Jason’s verified facts</div></li>
+      </ul>
+      <p class="gate"><b>Opens stage 3 when</b>Footer pages live, terms published, owner and address on the site.</p>
+    </section>
+
+    <section class="stage">
+      <header><div class="k">Stage 3</div><h2>Prove it</h2><p>Consent, pricing and credibility, reviewed by counsel.</p></header>
+      <ul>
+        <li class="it trust"><span class="no">9</span><div><small>Trust · gate</small>Consent proof for every tier, plus a Jornaya explainer</div></li>
+        <li class="it trust"><span class="no">10</span><div><small>Trust</small>“Safe to call and text” page, written with counsel</div></li>
+        <li class="it price"><span class="no">12</span><div><small>Pricing</small>One price table</div></li>
+        <li class="it price"><span class="no">13</span><div><small>Pricing</small>Justify $15 vs $12 and the cheap feed</div></li>
+        <li class="it price"><span class="no">14</span><div><small>Pricing</small>Delivery timing, including GoHighLevel</div></li>
+        <li class="it bio"><span class="no">16</span><div><small>Bio</small>Short and long bio, every claim confirmed by Jason</div></li>
+        <li class="it price"><span class="no">22</span><div><small>Proof</small>Start collecting real reviews</div></li>
+      </ul>
+      <p class="gate"><b>Opens stage 4 when</b>Items 4 to 14 are done and counsel has signed off on consent wording.</p>
+    </section>
+
+    <section class="stage">
+      <header><div class="k">Stage 4</div><h2>Launch products</h2><p>The new products, in the order they can go live.</p></header>
+      <ul>
+        <li class="it prod"><span class="no">17</span><div><small>Products</small>Build live transfer at $49</div></li>
+        <li class="it prod"><span class="no">18</span><div><small>Products</small>Pilot, bundle pricing, publish results</div></li>
+        <li class="it prod"><span class="no">19</span><div><small>Products</small>Tag leads, turn outcomes into claims</div></li>
+        <li class="it prod"><span class="no">20</span><div><small>Products</small>Live chatbot, disclosed as a bot</div></li>
+        <li class="it prod"><span class="no">21</span><div><small>Products · gated</small>Inside sales bot for orders and questions</div></li>
+        <li class="it price"><span class="no">23</span><div><small>Proof</small>Map screenshot, sample lead card, navy palette</div></li>
+      </ul>
+      <p class="gate"><b>Opens stage 5 when</b>The chatbot has run clean for a week. The sales bot then goes on the 800 number last.</p>
+    </section>
+
+    <section class="stage">
+      <header><div class="k">Stage 5</div><h2>Lock it in</h2><p>Final checks, then the score that proves it.</p></header>
+      <ul>
+        <li class="it price"><span class="no">24</span><div><small>Proof</small>Keep Savvy’s edges up front</div></li>
+        <li class="it trust"><span class="no">25</span><div><small>Trust</small>Counsel review of consent, TCPA and recording wording</div></li>
+        <li class="it trust"><span class="no">26</span><div><small>Trust</small>Re-score against the same five rivals</div></li>
+      </ul>
+      <p class="gate"><b>Done when</b>Every item is checked or dropped on purpose, and the new score is in.</p>
+    </section>
+
+  </div>
+
+  <div class="bottom">
+    <div class="box">
+      <h3>Where it lands</h3>
+      <div class="score"><span class="n">5.4</span><span class="a">→</span><span class="n" style="color:var(--teal)">6.8</span></div>
+      <ul>
+        <li>Stages 2 and 3 move content from <b>4.0 to about 6.5</b>.</li>
+        <li>That takes the overall score to <b>about 6.2</b>.</li>
+        <li>Stage 4 with the dialer adds <b>about 0.6</b>, level with Caboom at 6.9.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Waiting on you</h3>
+      <ul>
+        <li><b>Stage 1:</b> legal entity name, mailing address and the stack decision.</li>
+        <li><b>Stage 2:</b> Jason’s real facts for his bio.</li>
+        <li><b>Stage 3:</b> a lawyer for the consent and “safe to call and text” wording.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Rules for every claim</h3>
+      <ul>
+        <li>Nothing goes live that Jason cannot back up.</li>
+        <li>Counsel signs off on every compliance statement.</li>
+        <li>Pilot data replaces the live transfer assumptions before the model is trusted.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="fine">Stage order follows the dependencies in the checklist: the sales bot needs items 4 to 14, the bot launch needs a clean week of chatbot, and consent wording needs counsel. Scores are judgment from public pages in October 2026. Full detail is in dominate-checklist.md.</p>
+</main>
