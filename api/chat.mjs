@@ -2,6 +2,7 @@ const MODEL = "claude-haiku-5-5";
 const MAX_MESSAGES = 30;
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_OUTPUT_TOKENS = 400;
+const MAX_TRANSCRIPT_LENGTH = 4500;
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 100;
 const requestCounts = new Map();
@@ -125,7 +126,7 @@ function cleanLead(raw) {
   return lead;
 }
 
-async function createContact(lead) {
+async function createContact(lead, transcript) {
   const parts = lead.name.split(/\s+/);
   const res = await fetch(`${GHL}/contacts/`, {
     method: "POST",
@@ -162,6 +163,13 @@ async function createContact(lead) {
     headers: ghlHeaders(),
     body: JSON.stringify({ body: note }),
   }).catch(() => {});
+  if (transcript) {
+    await fetch(`${GHL}/contacts/${contactId}/notes`, {
+      method: "POST",
+      headers: ghlHeaders(),
+      body: JSON.stringify({ body: `Chat transcript (Savvy website chat):\n${transcript}` }),
+    }).catch(() => {});
+  }
   return contactId;
 }
 
@@ -197,7 +205,7 @@ async function getSlots(daysOut = 3) {
   return slots;
 }
 
-async function saveLead(leadJson) {
+async function saveLead(leadJson, transcript) {
   if (!ghlConfigured()) return { saved: false };
   let lead;
   try {
@@ -206,7 +214,7 @@ async function saveLead(leadJson) {
     return { saved: false };
   }
   if (!lead) return { saved: false };
-  const [contact, slots] = await Promise.allSettled([createContact(lead), getSlots()]);
+  const [contact, slots] = await Promise.allSettled([createContact(lead, transcript), getSlots()]);
   const contactId = contact.status === "fulfilled" ? contact.value : null;
   if (!contactId) return { saved: false };
   return {
@@ -302,7 +310,13 @@ export default {
       const leadMatch = text.match(/\[LEAD:(\{[\s\S]*?\})\]/);
       const { reply, tour } = splitTour(text.replace(/\[LEAD:\{[\s\S]*?\}\]/g, ""));
       if (!reply) return json({ error: "chat_unavailable" }, 502);
-      const lead = leadMatch ? await saveLead(leadMatch[1]) : null;
+      const transcript = leadMatch
+        ? [...input, { role: "assistant", content: reply }]
+            .map((m) => `${m.role === "user" ? "Visitor" : "Savvy"}: ${m.content}`)
+            .join("\n\n")
+            .slice(-MAX_TRANSCRIPT_LENGTH)
+        : "";
+      const lead = leadMatch ? await saveLead(leadMatch[1], transcript) : null;
       return json({ reply, tour, lead });
     } catch {
       return json({ error: "chat_unavailable" }, 502);
