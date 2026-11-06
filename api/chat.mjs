@@ -3,7 +3,7 @@ const MAX_MESSAGES = 30;
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_OUTPUT_TOKENS = 400;
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 12;
+const MAX_REQUESTS_PER_WINDOW = 50;
 const requestCounts = new Map();
 
 // Tour stops. The model may only point at these ids; anything else is dropped.
