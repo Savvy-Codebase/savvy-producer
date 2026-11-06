@@ -310,8 +310,8 @@
     function setChoice(open){choice.classList.toggle('show',open);launch.setAttribute('aria-expanded',String(open||box.classList.contains('show')));choiceNote.textContent=''}
     launch.addEventListener('click',function(){if(box.classList.contains('show')){setOpen(false);return}setChoice(!choice.classList.contains('show'))});
     document.getElementById('choicechat').addEventListener('click',function(){setChoice(false);setOpen(true)});
-    window.savvyMuteSiteMedia=function(){try{var f=document.getElementById('heroYouTubeEmbed');if(f&&f.contentWindow&&f.src)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'mute',args:[]}),'https://www.youtube-nocookie.com');var v=document.getElementById('heroLaunchVideo');if(v)v.muted=true}catch(e){}};
-    document.getElementById('choicevoice').addEventListener('click',function(){if(typeof window.savvyVoiceStart==='function'){setChoice(false);window.savvyMuteSiteMedia();window.savvyVoiceStart()}else choiceNote.textContent='Voice chat is coming soon. Web chat is ready now.'});
+    window.savvyPauseSiteMedia=function(){try{var f=document.getElementById('heroYouTubeEmbed');if(f&&f.contentWindow&&f.src)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'pauseVideo',args:[]}),'https://www.youtube-nocookie.com');var v=document.getElementById('heroLaunchVideo');if(v)v.pause()}catch(e){}};
+    document.getElementById('choicevoice').addEventListener('click',function(){if(typeof window.savvyVoiceStart==='function'){setChoice(false);window.savvyPauseSiteMedia();window.savvyVoiceStart()}else choiceNote.textContent='Voice chat is coming soon. Web chat is ready now.'});
     document.getElementById('chatclose').addEventListener('click',function(){setOpen(false);launch.focus()});
     document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(box.classList.contains('show')){setOpen(false);launch.focus()}else if(choice.classList.contains('show')){setChoice(false);launch.focus()}});
     form.addEventListener('submit',function(e){e.preventDefault();ask(input.value)});
