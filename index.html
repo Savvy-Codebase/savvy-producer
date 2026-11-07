@@ -368,7 +368,7 @@
     function fail(s,msg){teardown(s);if(s!==lastShown)return;btns.hidden=true;failEl.hidden=false;render('error',msg);webBtn.focus()}
     var lastShown=null;
     function end(){var s=cur;teardown(s);hidePanel();lastShown=null}
-    function sendFrame(s,buf){var w=s.ws;if(w&&w.readyState===1&&w.bufferedAmount<1048576)try{w.send(buf)}catch(e){}}
+    function sendFrame(s,buf){var w=s.ws;if(!(w&&w.readyState===1&&w.bufferedAmount<1048576))return;if(s.sources.size||Date.now()<s.quietUntil)buf=new ArrayBuffer(buf.byteLength);try{w.send(buf)}catch(e){}}
     function setupCapture(s){var ctx=s.ctx,src=ctx.createMediaStreamSource(s.stream),sink=ctx.createGain();s.src=src;sink.gain.value=0;sink.connect(ctx.destination);s.sink=sink;
       function viaScript(){if(cur!==s)return;var sp=ctx.createScriptProcessor(2048,1,1),r=makeResampler(ctx.sampleRate);sp.onaudioprocess=function(e){var o=r.push(e.inputBuffer.getChannelData(0));for(var k=0;k<o.length;k++)sendFrame(s,o[k].buffer)};src.connect(sp);sp.connect(sink);s.node=sp}
       if(ctx.audioWorklet&&window.AudioWorkletNode&&window.Blob&&window.URL&&URL.createObjectURL){var url=URL.createObjectURL(new Blob([WORKLET_SRC],{type:'application/javascript'}));
@@ -376,14 +376,14 @@
       viaScript();return Promise.resolve()}
     function play(s,buf){var ctx=s.ctx;if(!ctx)return;var n=buf.byteLength>>1;if(!n)return;var dv=new DataView(buf),ab=ctx.createBuffer(1,n,OUT_RATE),ch=ab.getChannelData(0);for(var i=0;i<n;i++)ch[i]=dv.getInt16(i*2,true)/32768;
       var node=ctx.createBufferSource();node.buffer=ab;node.connect(ctx.destination);var sc=nextSched(ctx.currentTime,s.next,ab.duration);s.next=sc.next;s.sources.add(node);
-      node.onended=function(){s.sources.delete(node);if(!s.sources.size&&cur===s&&s.opened)setState(s,'listening')};node.start(sc.start);setState(s,'speaking')}
+      node.onended=function(){s.sources.delete(node);if(!s.sources.size){s.quietUntil=Date.now()+700;if(cur===s&&s.opened)setState(s,'listening')}};node.start(sc.start);setState(s,'speaking')}
     function openSocket(s){var ws;try{ws=new WebSocket(WS_URL)}catch(e){fail(s,MSG.unavailable);return}
       ws.binaryType='arraybuffer';s.ws=ws;s.timer=setTimeout(function(){fail(s,MSG.timeout)},CONNECT_TIMEOUT_MS);
       ws.onopen=function(){clearTimeout(s.timer);s.opened=true;setState(s,'listening')};
-      ws.onmessage=function(e){if(typeof e.data==='string'){try{var m=JSON.parse(e.data);if(m&&m.type==='clear'){clearAudio(s);if(s.opened)setState(s,'listening')}}catch(err){}return}if(e.data instanceof ArrayBuffer)play(s,e.data)};
+      ws.onmessage=function(e){if(typeof e.data==='string'){try{var m=JSON.parse(e.data);if(m&&m.type==='clear'){clearAudio(s);s.quietUntil=Date.now()+700;if(s.opened)setState(s,'listening')}}catch(err){}return}if(e.data instanceof ArrayBuffer)play(s,e.data)};
       ws.onerror=function(){};
       ws.onclose=function(e){fail(s,e.code===1013?MSG.busy:e.code===1008?MSG.unavailable:s.opened?(e.code===1000||e.code===1005?MSG.ended:MSG.dropped):MSG.unavailable)}}
-    function start(){if(cur)return;var s=cur={ws:null,ctx:null,stream:null,node:null,src:null,sink:null,timer:0,sources:new Set(),next:0,muted:false,opened:false,done:false,state:'connecting'};lastShown=s;
+    function start(){if(cur)return;var s=cur={ws:null,ctx:null,stream:null,node:null,src:null,sink:null,timer:0,sources:new Set(),quietUntil:0,next:0,muted:false,opened:false,done:false,state:'connecting'};lastShown=s;
       var chatBox=document.getElementById('chatbox');if(chatBox&&chatBox.classList.contains('show')){var cc=document.getElementById('chatclose');if(cc)cc.click()}
       btns.hidden=false;failEl.hidden=true;muteBtn.setAttribute('aria-pressed','false');muteBtn.textContent='Mute microphone';box.classList.add('show');refresh(s);endBtn.focus();
       var AC=window.AudioContext||window.webkitAudioContext;
