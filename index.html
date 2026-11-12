@@ -412,5 +412,8 @@
     window.addEventListener('beforeunload',function(){teardown(cur)});
   })();
   </script>
+  <script>
+    (function(){var params=new URLSearchParams(window.location.search);if(params.get('chat')!=='open')return;params.delete('chat');window.history.replaceState({},'',window.location.pathname+(window.location.hash||''));var launch=document.getElementById('chatlaunch');if(launch)launch.click()})();
+  </script>
 </body>
 </html>
