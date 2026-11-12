@@ -16,3 +16,4 @@ __pycache__/
 
 # Technical/source materials kept local for reference
 .local-reference/
+.vercel
